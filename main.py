@@ -21,6 +21,6 @@ async def buscar_imagens(term: str):
     try:
         with DDGS() as ddgs:
             results = ddgs.images(term, max_results=10)
-        return {"images": resultados}
+        return {"images": results}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
