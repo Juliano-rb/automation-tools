@@ -1,5 +1,7 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Query
 from duckduckgo_search import DDGS
+
+from parameters import Region, LicenseImage, Size, TypeImage, Color, Layout
 
 app = FastAPI()
 
@@ -19,15 +21,19 @@ async def buscar_na_web(term: str, region: str = "br-pt", max_results=10):
 @app.get("/search_images")
 async def buscar_imagens(
     term: str,
-    region: str = "br-pt",
-    max_results: int = 10,
-    license_image: str = "any",
-    size: str = None,
-    type_image: str = None,
-    color: str = None,
-    layout: str = None,
+    region: Region = Query(Region.BR_PT),
+    max_results: int = Query(10, gt=0),
+    license_image: LicenseImage = Query(LicenseImage.ANY),
+    size: Size = Query(None),
+    type_image: TypeImage = Query(None),
+    color: Color = Query(None),
+    layout: Layout = Query(None),
 ):
-    """Performs an image search and returns the results."""
+    """DuckDuckGo images search. Query params: https://duckduckgo.com/params.
+
+    Returns:
+        List of dictionaries with images search results.
+    """
     try:
         max_results = int(max_results)
         with DDGS() as ddgs:
