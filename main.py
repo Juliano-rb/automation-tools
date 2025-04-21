@@ -77,8 +77,6 @@ async def crawl_web(
     extraction_schema: str = None,
 ):
     try:
-        session_id = "session1"
-
         extraction_schema_dict = (
             json.loads(extraction_schema) if extraction_schema else None
         )
@@ -93,7 +91,7 @@ async def crawl_web(
             ),
         )
         async with AsyncWebCrawler(headless=True, js_engine="playwright") as crawler:
-            result = await crawler.arun(url=url, config=config, session_id=session_id)
+            result = await crawler.arun(url=url, config=config)
 
             if extraction_schema:
                 return json.loads(result.extracted_content)
