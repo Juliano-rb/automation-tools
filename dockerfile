@@ -6,6 +6,8 @@ COPY requirements.txt .
 
 RUN pip install --no-cache-dir -r requirements.txt
 
+RUN crawl4ai-setup
+
 COPY . .
 
 EXPOSE 3001
