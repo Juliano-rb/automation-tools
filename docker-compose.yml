@@ -4,4 +4,4 @@ services:
   automation-tools:
     build: .
     ports:
-      - "3005:8000"
+      - "${PORT:-3001}:8000"
