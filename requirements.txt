@@ -1,5 +1,5 @@
 fastapi
 uvicorn
 duckduckgo-search
-crawl4ai
+crawl4ai==0.6.0
 fastapi[standard]

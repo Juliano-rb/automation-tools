@@ -13,13 +13,6 @@ if sys.platform.startswith("win"):
     asyncio.set_event_loop_policy(asyncio.WindowsProactorEventLoopPolicy())
 
 
-async def patched_close(self):
-    return
-
-
-# Apply the monkey patch
-AsyncPlaywrightCrawlerStrategy.close = patched_close
-
 app = FastAPI()
 
 
